@@ -1,5 +1,20 @@
 package main
 
+import (
+	"crypto/rand"
+	"encoding/hex"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"time"
+
+	"github.com/anacrolix/torrent/bencode"
+	"github.com/nektro/go-util/alias"
+	"github.com/nektro/go-util/util"
+	etc "github.com/nektro/go.etc"
+	"github.com/spf13/pflag"
+)
+
 type TrackerResponse struct {
 	FailReason  string        `bencode:"failure reason"`
 	WarnMsg     string        `bencode:"warning message"`
