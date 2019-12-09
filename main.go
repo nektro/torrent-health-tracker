@@ -1,5 +1,9 @@
 package main
 
+var client = &http.Client{
+	Timeout: time.Second * 5,
+}
+
 func main() {
 
 	flagTR := pflag.StringArrayP("tracker", "t", []string{}, "")
