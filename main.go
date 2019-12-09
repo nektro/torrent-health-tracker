@@ -36,3 +36,4 @@ func main() {
 			util.LogError("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), "unknown scheme:", urlO.Scheme)
 		}
 	}
+}
