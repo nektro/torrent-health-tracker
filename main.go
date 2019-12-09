@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"sync"
 	"time"
 
 	"github.com/anacrolix/torrent/bencode"
@@ -94,11 +95,21 @@ func main() {
 		seeders := 0
 		leechers := 0
 
+		wg := new(sync.WaitGroup)
+		wg.Add(len(trackers))
+
 		for _, jtem := range trackers {
-			s, l, _ := queryTracker(jtem, btih)
-			seeders += s
-			leechers += l
+			lkn := jtem
+			go func() {
+				s, l, _ := queryTracker(lkn, btih)
+				seeders += s
+				leechers += l
+				wg.Done()
+			}()
 		}
+
+		wg.Wait()
+
 		t := &Torrent{btih, name, seeders, leechers}
 		torrents[btih] = t
 		util.Log(alias.F("[%d/%d]:", i+1, len(*flagMG)), alias.F("%+v", t))
