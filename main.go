@@ -88,4 +88,32 @@ func main() {
 		torrents[btih] = t
 		util.Log(alias.F("[%d/%d]:", i+1, len(*flagMG)), alias.F("%+v", t))
 	}
+
+func queryTracker(urlS string, btih string) (int, int, error) {
+	urlP, _ := url.Parse(urlS)
+
+	if urlP.Scheme == "http" {
+
+		v := url.Values{}
+		v.Add("info_hash", string(hashToBin(btih)))
+		v.Add("peer_id", random(20))
+		v.Add("port", "6882")
+
+		u := (urlS + "?" + v.Encode())
+		q, _ := http.NewRequest(http.MethodGet, u, nil)
+		s, err := client.Do(q)
+		if err != nil {
+			// util.LogWarn(err.Error())
+			return 0, 0, err
+		}
+		b, err := ioutil.ReadAll(s.Body)
+		util.DieOnError(err)
+
+		tr := TrackerResponse{}
+		bencode.Unmarshal(b, &tr)
+
+		return tr.Complete, tr.Incomplete, nil
+	}
+	return 0, 0, nil
+}
 }
