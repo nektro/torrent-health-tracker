@@ -116,4 +116,11 @@ func queryTracker(urlS string, btih string) (int, int, error) {
 	}
 	return 0, 0, nil
 }
+
+func hashToBin(h string) []byte {
+	b := make([]byte, hex.DecodedLen(len(h)))
+	_, err := hex.Decode(b, []byte(h))
+	util.DieOnError(err)
+	return b
+}
 }
