@@ -41,7 +41,7 @@ type Torrent struct {
 }
 
 var client = &http.Client{
-	Timeout: time.Second * 5,
+	Timeout: time.Second * 1,
 }
 
 func main() {
