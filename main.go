@@ -89,6 +89,19 @@ func main() {
 		util.Log(alias.F("[%d/%d]:", i+1, len(*flagMG)), alias.F("%+v", t))
 	}
 
+	//
+
+	etc.MFS.Add(http.Dir("www"))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		etc.WriteHandlebarsFile(r, w, "/index.hbs", map[string]interface{}{
+			"torrents": torrents,
+		})
+	})
+
+	http.ListenAndServe(":80", nil)
+}
+
 func queryTracker(urlS string, btih string) (int, int, error) {
 	urlP, _ := url.Parse(urlS)
 
@@ -123,4 +136,12 @@ func hashToBin(h string) []byte {
 	util.DieOnError(err)
 	return b
 }
+
+func random(l int) string {
+	if l%4 != 0 {
+		return ""
+	}
+	b := make([]byte, l/4)
+	rand.Read(b)
+	return hex.EncodeToString(b)
 }
