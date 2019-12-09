@@ -7,5 +7,24 @@
         <title>Torrent Health Tracker</title>
     </head>
     <body>
+        <h1>Torrent Health Tracker</h1>
+        <table>
+            <thead>
+                <th>Info Hash</th>
+                <th data-sort-method="number" data-sort-default="">Name</th>
+                <th>Seeders</th>
+                <th>Leechers</th>
+            </thead>
+            <tbody>
+                {{#each torrents}}
+                <tr>
+                    <td>🧲 {{Hash}}</td>
+                    <td>{{Name}}</td>
+                    <td>{{Seeders}}</td>
+                    <td>{{Leechers}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </body>
 </html>
