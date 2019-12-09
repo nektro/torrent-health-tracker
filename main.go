@@ -61,16 +61,16 @@ func main() {
 		if urlO.Scheme == "http" {
 			req, err := http.NewRequest(http.MethodGet, item, nil)
 			if err != nil {
-				util.LogWarn("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), "bad:", item, err.Error())
+				util.LogWarn("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), item, err.Error())
 				continue
 			}
 			res, err := client.Do(req)
 			if err != nil {
-				util.LogWarn("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), "bad:", item, err.Error())
+				util.LogWarn("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), item, err.Error())
 				continue
 			}
 			ioutil.ReadAll(res.Body)
-			util.Log("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), "good:", item)
+			util.Log("tracker:", alias.F("[%d/%d]:", i+1, len(*flagTR)), item)
 			trackers = append(trackers, item)
 
 		} else {
