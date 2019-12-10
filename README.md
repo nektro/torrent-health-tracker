@@ -29,3 +29,13 @@ $ ./start.sh
 
 ## Deployment
 Coming soon!
+
+## Built With
+Output of `go list -f '{{ join .Imports "\n" }}'` sans stdlib packages.
+- github.com/anacrolix/torrent/bencode
+- github.com/nektro/go-util/alias
+- github.com/nektro/go-util/util
+- github.com/nektro/go.etc
+- github.com/nektro/torrent-health-tracker/statik
+- github.com/rakyll/statik/fs
+- github.com/spf13/pflag
