@@ -9,3 +9,20 @@
 **Torrent Health Tracker** is a way to provide a web interface into the statistics on the health of a collection of torrents. This is accomplished by looking at assembling tracker stats and periodically re-pinging the swarm. Simplely provide `torrent-health-tracker` with a list of trackers and magnet links and it'll do its thing!
 
 > Note: currently only supports HTTP trackers.
+
+## Development
+
+### Prerequisites
+- The Go Language 1.12+ (https://golang.org/dl/)
+
+### Installing
+Run
+```
+$ go get -u -v github.com/nektro/torrent-health-tracker
+```
+and then make your way to `$GOPATH/src/github.com/nektro/torrent-health-tracker/`.
+
+Once there, add your `--tracker` and `--magnet` URLs and run:
+```
+$ ./start.sh
+```
