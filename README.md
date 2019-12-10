@@ -26,3 +26,6 @@ Once there, add your `--tracker` and `--magnet` URLs and run:
 ```
 $ ./start.sh
 ```
+
+## Deployment
+Coming soon!
