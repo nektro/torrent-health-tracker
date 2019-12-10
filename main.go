@@ -13,7 +13,10 @@ import (
 	"github.com/nektro/go-util/alias"
 	"github.com/nektro/go-util/util"
 	etc "github.com/nektro/go.etc"
+	"github.com/rakyll/statik/fs"
 	"github.com/spf13/pflag"
+
+	_ "github.com/nektro/torrent-health-tracker/statik"
 )
 
 type TrackerResponse struct {
@@ -118,6 +121,11 @@ func main() {
 	//
 
 	etc.MFS.Add(http.Dir("www"))
+
+	statikFS, err := fs.New()
+	if err == nil {
+		etc.MFS.Add(http.FileSystem(statikFS))
+	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		etc.WriteHandlebarsFile(r, w, "/index.hbs", map[string]interface{}{
